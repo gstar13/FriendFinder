@@ -5,10 +5,12 @@
   <head>
     <!-- Tab Title -->
     <title>Friend Finder | Quiz</title>
-   
+   <!-- Link in a tab icon, cuz why not -->
+   <link rel="icon" href="http://www.freeiconspng.com/uploads/burn-burning-fire-flame-heat-icon--icon-search-engine-20.png">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   </head>
 
 
@@ -19,7 +21,7 @@
 
       <!-- Quiz Page Title -->
       <div class="page-header">
-        <h1 style="font-size: 45px;"><span class="glyphicon glyphicon-fire" style="color: #d9534f;"></span> Friend Finder Quiz</h1>
+        <h1 style="font-size: 45px;"><span class="glyphicon glyphicon-sunglasses" style="color: #d9534f;"></span> Friend Finder Quiz <span class="glyphicon glyphicon-sunglasses" style="color: #d9534f;"></span></h1>
       </div>
 
 
@@ -229,7 +231,7 @@
 
     <!-- JavaScript for Submission Logic -->
     <script>
-      // Global Variable Declaration (scoping fix)
+      // Global Variables 
       var allFieldsCompleted;
       $(document).ready(function() {
         // Event Listener for Submission
@@ -280,7 +282,7 @@
       }
       function collectInputs(){
         // Make new friend object
-        var newFriend = {
+        var userData = {
           name: $('#formName').val().trim(),
           photo: $('#formImage').val().trim(),
           scores: []
@@ -294,10 +296,10 @@
         .promise().done(function(){
           
           // Push the array of scores to the new friend object
-          newFriend.scores = scoresArray;
+          userData.scores = scoresArray;
           // POST the newFriend to the friends.js file and get back the best match
           var currentURL = window.location.origin;
-          $.post(currentURL + "/api/friends", newFriend, function(data){
+          $.post(currentURL + "/api/friends", userData, function(data){
             // Add Best Match attributes to Modal
             $('#matchName').text(data.name);
             $('#matchImg').attr('src', data.photo);

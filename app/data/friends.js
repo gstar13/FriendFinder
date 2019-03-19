@@ -1,5 +1,5 @@
 //template of friend data
-var friendsData = [
+var friends= [
     {
 name: "Jim Wilbur",
 photo: "https://www.google.com/search?q=bear+images&tbm=isch&source=iu&ictx=1&fir=aOYYcJud_1wVVM%253A%252CNNNPcHGxjgyFHM%252C_&vet=1&usg=AI4_-kSCAQylMxLL34pm2Rnu-IA1TtXK2Q&sa=X&ved=2ahUKEwjGv_6hko3hAhUrIjQIHaPZDcMQ9QEwCXoECAcQFg#imgrc=aOYYcJud_1wVVM:",
@@ -51,5 +51,6 @@ scores: [1,5,2,3,4,4,4,2,1,5]
         scores: [2,3,4,2,3,2,3,5,3,2]
     }
 ];
+console.log(friends);
 //export this to the api route
-module.exports = friendsData;
+module.exports = friends;

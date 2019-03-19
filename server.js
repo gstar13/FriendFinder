@@ -1,26 +1,29 @@
 //dependencies
 var express = require("express");
-
-var bodyParser = require("body-parser");
-
 //set up express app
 var app = express ();
+var bodyParser = require("body-parser");
+
 var PORT = process.env.PORT || 8080;
 
+//set up express to handle the data parsing
 
-//link to html and api routes
-var apiRoutes = require('./app/routing/api-routes.js');
-var htmlRoutes = require('./app/routing/html-routes.js');
 
-//set up express to handle the data parsing 
-app.use(bodyParser.json());
+//create application/url parser
 app.use(bodyParser.urlencoded({extended: true }));
-app.use(bodyParser.text);
-app.use(bodyParser.json({type: 'application/vnd.api+json' }));
+ 
+//parse different custom json types as json
+app.use(bodyParser.json({type: 'application/**json'}))
 
-// Server Routing Map 
-apiRoutes(app); // API route - Must be listed first due to the HTML default catch all "use" route
-htmlRoutes(app); // HTML route 
+//parse some custom thing into a buffer
+app.use(bodyParser.raw({type: 'application/vnd.custom-type' }))
+
+//parse html body into a string
+app.use(bodyParser.text({type: 'text/html'}))
+require("./app/routing/api-routes.js")(app);
+require("./app/routing/html-routes.js")(app);
+
+
 
 
 // Start our server so that it can begin listening to client requests.
